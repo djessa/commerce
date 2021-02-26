@@ -7,7 +7,7 @@
     <h3>{{ product.name }}</h3>
 
     <div class="text-center">
-        <img src="{{ product.image }}" alt="{{ product.name }}">
+        <img src="{{ product.image ? product.image : 'https://via.placeholder.com/400x400.png/0066ee?text=default-image'  }}" alt="{{ product.name ?: 'Photo de produit' }}">
         <p>{{ product.price }} $</p>
         <p>{{ include('product/_delete_form.html.twig') }}</p>
         <p><a href="{{ path('product_index') }}">Retour</a></p>
