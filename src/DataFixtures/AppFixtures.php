@@ -14,7 +14,7 @@ class AppFixtures extends Fixture
         $faker->addProvider(new \Bezhanov\Faker\Provider\Commerce($faker));
         $faker->addProvider(new \Liior\Faker\Prices($faker));
         
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $product = new Product();
             $product->setName($faker->productName)
                     ->setPrice($faker->price(20, 200))

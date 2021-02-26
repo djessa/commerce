@@ -1,0 +1,11 @@
+liip_imagine:
+
+    driver: "gd"
+
+    filter_sets :
+
+        small_thumb :
+
+            filters :
+
+                thumbnail  : { size : [80, 80], mode: outbound }
