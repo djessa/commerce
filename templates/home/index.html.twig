@@ -15,7 +15,7 @@
                     <hr>
                     <p><strong>{{ product.name }}</strong></p>
                     <div class="d-flex justify-content-between align-items">
-                        <a href="" class="btn-sm btn-success float-right"> 
+                        <a href="{{ path('cart_add', {id: product.id}) }}" class="btn-sm btn-success float-right"> 
                         <i class="fa fa-shopping-cart mr-1"></i>
                         Ajouter
                         </a>
