@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Achat{% endblock %}
+
+{% block body %}
+    <div class="bg-light p-3 mt-5" id="is_client">
+       <form action="" method="POST">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="d-flex justify-content-between">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="is_client" id="flexRadioDefault1" value="false">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Nouveau
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="is_client" id="flexRadioDefault2" value="true">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Déjà client
+                            </label>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary">Continuer</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    
+{% endblock %}

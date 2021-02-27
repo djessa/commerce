@@ -61,4 +61,5 @@ class CartController extends AbstractController
         $sessionInterface->set('panier', $panier);
         return $this->redirectToRoute('cart');
     }
+
 }
