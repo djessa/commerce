@@ -98,4 +98,13 @@ class Commande
 
         return $this;
     }
+
+    public function total() 
+    {
+        $total = 0;
+        foreach($this->ligneCommandes as $line) {
+            $total += ($line->getQuantity() * $line->getProduct()->getPrice());
+        }
+        return $total;
+    }
 }

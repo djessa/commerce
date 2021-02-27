@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List |Commande{% endblock %}
+
+{% block header %}  {% include "layout/_admin_header.html.twig" %} {% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between p-3">
+        <h1 class="h3 text-muted">Liste des commandes :  {{ commandes.getTotalItemCount }} </h1>
+    </div>
+    {% for commande in commandes %}
+        <div class="card  mb-5">
+            <div class="card-header d-flex justify-content-between">
+                <h5>Date : {{ commande.createdAt | date('d/m/Y') }} à {{ commande.createdAt | date('H:m:s') }} </h5> <h5>N° commande : {{ commande.id }} </h5> <h5>Client :  {{ commande.client }} </h5>
+            </div>
+            <div class="card-body">
+                <table class="table text-center border-top table-stripped">
+                    <thead>
+                        <tr>
+                            <th>Produits</th>
+                            <th>Prix Unit</th>
+                            <th>Quantité</th>
+                            <th>Prix total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for ligne in commande.ligneCommandes %}
+                        <tr>
+                            <td> {{ ligne.product.name }} </td>
+                            <td>{{  ligne.product.price }} $</td>
+                            <td>{{  ligne.quantity }}</td> 
+                            <td> {{  (ligne.product.price) *  (ligne.quantity) }} $</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <th colspan="3" class="text-right">Toatal</th><th>{{ commande.total }} $</th>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="mt-2">
+        {{ knp_pagination_render(commandes) }}
+    </div>
+{% endblock %}

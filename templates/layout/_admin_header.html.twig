@@ -1,4 +1,4 @@
- <header class="bg-light shadow-sm navbar-sticky">
+ <header class="bg-light shadow-sm navbar-sticky fixed-top">
       <div class="navbar navbar-expand-md navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand  d-sm-block me-4 order-lg-1" href="{{ path('app_home') }}">
@@ -13,6 +13,9 @@
                 <hr class="my-3">
                 <!-- Primary menu-->
                 <ul class="navbar-nav">
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ path('commande') }}">Liste des commandes</a>
+                      </li>
                       <li class="nav-item">
                           <a class="nav-link" href="{{ path('product_index') }}">Gestion des produits</a>
                       </li>
