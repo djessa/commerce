@@ -3,5 +3,17 @@
 {% block title %}Achat!{% endblock %}
 
 {% block body %}
-    
+    <div class="row mt-5">
+        <div class="col-md-6 mx-auto">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="numero">Votre numéro du carte bancaire</label>
+                    <input type="text" value="" name="numero" class="form-control mt-2" placeholder="Entrer votre numéro du carte bancaire">
+                </div>
+                <div class="mt-3 d-grid">
+                    <button type="submit" class="btn btn-primary">Terminer</button>
+                </div>
+            </form>
+        </div>
+    </div>   
 {% endblock %}
