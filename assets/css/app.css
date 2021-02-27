@@ -9,3 +9,8 @@
 .product img:hover {
     transform: scale(1.075);
 }
+
+.alert-success {
+    background-color: green;
+    color: white;
+}

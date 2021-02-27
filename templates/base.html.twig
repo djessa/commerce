@@ -10,8 +10,8 @@
 
     </head>
     <body>
-    
-        {% include "layout/_header.html.twig" %}
+
+        {% block header %}  {% include "layout/_header.html.twig" %} {% endblock %}
 
         <main class="container mt-3 mb-3">
             {% block body %}{% endblock %}

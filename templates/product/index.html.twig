@@ -2,7 +2,10 @@
 
 {% block title %}Product index{% endblock %}
 
+{% block header %}  {% include "layout/_admin_header.html.twig" %} {% endblock %}
+
 {% block body %}
+    
     <div class="d-flex justify-content-between p-3">
         <h1 class="h3 text-muted">Liste des produits :  {{ products.getTotalItemCount }} </h1>
         <a href="{{ path('product_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>

@@ -38,25 +38,22 @@ class BuyController extends AbstractController
      */
     public function index(Client $client, EntityManagerInterface $em, Request $request, SessionInterface $session, ProductRepository $productRepository)
     {
-        if($request->request->get('numero')) {
-           $panier = $session->get('panier');
-           $commande = new Commande;
-           $commande->setClient($client)
-                    ->setCreatedAt(new \DateTime());
-           foreach($panier as $id => $value) {
-               $ligne = new LigneCommande;
-               $ligne->setProduct($productRepository->find($id))
-                     ->setQuantity($value);
-               unset($panier[$id]);
-               $commande->addLigneCommande($ligne);
-               $em->persist($ligne);
-           }
-           $em->persist($commande);
-           $em->flush();
-           $session->set('panier', $panier);
-           return $this->redirectToRoute('cart');
+        $panier = $session->get('panier');
+        $commande = new Commande;
+        $commande->setClient($client)
+                 ->setCreatedAt(new \DateTime());
+        foreach($panier as $id => $value) {
+            $ligne = new LigneCommande;
+            $ligne->setProduct($productRepository->find($id))
+                  ->setQuantity($value);
+            $ligne->getProduct()->setStock($ligne->getProduct()->getStock() - $value);
+            unset($panier[$id]);
+            $commande->addLigneCommande($ligne);
+            $em->persist($ligne);
         }
-        return $this->render('buy/index.html.twig', compact('client'));
+        $em->persist($commande);
+        $em->flush();
+        $session->set('panier', $panier);
+        return $this->render('buy/status.html.twig');
     }
-
 }
