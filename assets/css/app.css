@@ -1,3 +1,11 @@
 .btn-sm {
     text-decoration: none !important;
 }
+
+.product img {
+    transition: transform 0.3s ease-out;
+}
+
+.product img:hover {
+    transform: scale(1.075);
+}

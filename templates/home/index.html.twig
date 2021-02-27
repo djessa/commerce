@@ -9,9 +9,9 @@
 
     <div class="row">
         {% for product in products %}
-            <div class="col-4 mt-4">
-                <div class="border border-dark rounded shadow p-2 clearfix">
-                    <img class="img-fluid rounded" src="{{ product.image }}" alt="Image de {{ product.name }}">
+            <div class="col-4 mt-4 product">
+                <div class="border border-dark rounded shadow p-2 clearfix w-100 overflow-hidden">
+                    <img  class="img-fluid img-thumbnail rounded" src="{{ product.image }}" alt="Image de {{ product.name }}">
                     <hr>
                     <p><strong>{{ product.name }}</strong></p>
                     <div class="d-flex justify-content-between align-items">
