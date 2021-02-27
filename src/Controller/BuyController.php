@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Entity\Commande;
+use App\Entity\LigneCommande;
 use App\Repository\ClientRepository;
+use App\Repository\ProductRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,13 +36,23 @@ class BuyController extends AbstractController
     /**
      * @Route("/buy/{id}", name="buy")
      */
-    public function index(Client $client, EntityManagerInterface $em, Request $request, SessionInterface $session)
+    public function index(Client $client, EntityManagerInterface $em, Request $request, SessionInterface $session, ProductRepository $productRepository)
     {
         if($request->request->get('numero')) {
            $panier = $session->get('panier');
-           foreach($panier as $key => $value) {
-               unset($panier[$key]);
+           $commande = new Commande;
+           $commande->setClient($client)
+                    ->setCreatedAt(new \DateTime());
+           foreach($panier as $id => $value) {
+               $ligne = new LigneCommande;
+               $ligne->setProduct($productRepository->find($id))
+                     ->setQuantity($value);
+               unset($panier[$id]);
+               $commande->addLigneCommande($ligne);
+               $em->persist($ligne);
            }
+           $em->persist($commande);
+           $em->flush();
            $session->set('panier', $panier);
            return $this->redirectToRoute('cart');
         }

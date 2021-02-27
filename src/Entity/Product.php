@@ -40,14 +40,17 @@ class Product
     private $image;
 
     /**
-     * @ORM\ManyToMany(targetEntity=LigneCommande::class, mappedBy="product")
+     * @ORM\OneToMany(targetEntity=LigneCommande::class, mappedBy="product", orphanRemoval=true)
      */
-    private $ligneCommandes;
+    private $ligneCommande;
 
     public function __construct()
     {
-        $this->ligneCommandes = new ArrayCollection();
+        $this->ligneCommande = new ArrayCollection();
     }
+
+
+
 
     public function getId(): ?int
     {
@@ -105,16 +108,16 @@ class Product
     /**
      * @return Collection|LigneCommande[]
      */
-    public function getLigneCommandes(): Collection
+    public function getLigneCommande(): Collection
     {
-        return $this->ligneCommandes;
+        return $this->ligneCommande;
     }
 
     public function addLigneCommande(LigneCommande $ligneCommande): self
     {
-        if (!$this->ligneCommandes->contains($ligneCommande)) {
-            $this->ligneCommandes[] = $ligneCommande;
-            $ligneCommande->addProduct($this);
+        if (!$this->ligneCommande->contains($ligneCommande)) {
+            $this->ligneCommande[] = $ligneCommande;
+            $ligneCommande->setProduct($this);
         }
 
         return $this;
@@ -122,10 +125,15 @@ class Product
 
     public function removeLigneCommande(LigneCommande $ligneCommande): self
     {
-        if ($this->ligneCommandes->removeElement($ligneCommande)) {
-            $ligneCommande->removeProduct($this);
+        if ($this->ligneCommande->removeElement($ligneCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($ligneCommande->getProduct() === $this) {
+                $ligneCommande->setProduct(null);
+            }
         }
 
         return $this;
     }
+
+   
 }
